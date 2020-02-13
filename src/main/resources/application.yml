@@ -1,0 +1,19 @@
+
+spring:
+    datasource.url: jdbc:postgresql://localhost:5432/veloez-test-db
+    datasource.username: postgres
+    datasource.password: 123
+    jpa.hibernate.ddl-auto: update
+    jpa.show-sql: true
+    jpa.properties.hibernate.format_sql: true
+    jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    jpa.database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+jwt:
+    secret: SequenciaDeCaracteresParaAssinarToken
+    expiration: 600000
+
+logging.level.org.springframework.web.reactive.function.client.ExchangeFunctions: TRACE
+spring.http.log-request-details: true
+
+veloez.api.uri: localhost:3333
