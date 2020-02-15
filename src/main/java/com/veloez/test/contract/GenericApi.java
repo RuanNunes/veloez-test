@@ -4,7 +4,6 @@ package com.veloez.test.contract;
 
 import javax.validation.Valid;
 
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +18,6 @@ public interface GenericApi<T, V> {
 	
 	ResponseEntity<?> update(@Valid @RequestBody final T dto,@PathVariable final Long id);
 
-	ResponseEntity<?> findPaginate(@SpringQueryMap @Valid final V filters);
+//	ResponseEntity<?> findPaginate(@SpringQueryMap @Valid final V filters);
 
 }

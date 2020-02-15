@@ -9,6 +9,7 @@ spring:
     jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
     jpa.database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 
+
 jwt:
     secret: SequenciaDeCaracteresParaAssinarToken
     expiration: 600000
@@ -16,4 +17,4 @@ jwt:
 logging.level.org.springframework.web.reactive.function.client.ExchangeFunctions: TRACE
 spring.http.log-request-details: true
 
-veloez.api.uri: localhost:3333
+veloez.api.uri: https://desolate-eyrie-21186.herokuapp.com

@@ -11,13 +11,15 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
+import com.veloez.test.model.type.JsonDataUserType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Data
@@ -27,6 +29,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @SequenceGenerator(name = "sequence_generator", sequenceName = "SEQ_TRANSACTION", allocationSize = 1)
+@TypeDefs({@TypeDef(name = "JsonDataObject", typeClass = JsonDataUserType.class)})
 public class Transaction extends PersistentEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;

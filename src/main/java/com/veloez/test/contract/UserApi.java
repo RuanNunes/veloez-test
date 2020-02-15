@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public interface UserApi extends GenericApi<UserDTO, UserDTO> 
 {
 	@ApiOperation(value="Inclusão de User")

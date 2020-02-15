@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@RequestMapping("/veloez/test/places/")
+@RequestMapping("/places")
 public interface PlaceApi extends GenericApi<PlaceDTO, PlaceDTO> {
 	
 	@Override

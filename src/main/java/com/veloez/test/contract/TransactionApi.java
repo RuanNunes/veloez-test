@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.veloez.test.contract.dto.TransactionDTO;
-import com.veloez.test.contract.dto.UserDTO;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -22,6 +21,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/test/transactions")
 public interface TransactionApi extends GenericApi<TransactionDTO, TransactionDTO> 
 {
+	
+	
 	@ApiOperation(value="Inclusão de Transação")
 	@PostMapping()
 	public ResponseEntity<Void> save(@Valid @RequestBody TransactionDTO dto);

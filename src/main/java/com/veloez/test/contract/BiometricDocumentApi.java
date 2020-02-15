@@ -1,25 +1,8 @@
 package com.veloez.test.contract;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.veloez.test.contract.dto.BiometricDocumentDTO;
-import com.veloez.test.contract.dto.PlaceDTO;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
-@RequestMapping("/api/v1/products/")
+//@RequestMapping("/api/v1/products/")
 public interface BiometricDocumentApi extends GenericApi<BiometricDocumentDTO, BiometricDocumentDTO> {
 
 //    @Override

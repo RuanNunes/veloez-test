@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private String id;
 	//TODO Passar file junto no post
 	@NotNull
 	private String avatarUrl;
@@ -38,10 +39,10 @@ public class UserDTO implements Serializable {
 	@NotNull
 	private BigDecimal balance;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
-	private LocalDateTime created;
-
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
-	private LocalDateTime updated;
+//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
+//	private LocalDateTime created;
+//
+//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
+//	private LocalDateTime updated;
 
 }

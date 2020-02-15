@@ -1,18 +1,67 @@
 package com.veloez.test.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.veloez.test.contract.dto.TransactionDTO;
+import com.veloez.test.contract.dto.UserDTO;
+import com.veloez.test.mapper.TransactionMapper;
+import com.veloez.test.model.Classe;
+import com.veloez.test.model.Transaction;
+import com.veloez.test.repository.TransactionRepository;
+import com.veloez.test.service.exception.ResourceNotFoundException;
 
 @Service
 public class TransactionService implements GenericService<TransactionDTO, TransactionDTO>{
-
+	
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private TransactionMapper mapper;
+		
 	@Override
 	public TransactionDTO save(TransactionDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		if (Classe.USER.equals(dto.getClasse())) {
+			try {
+				final var responseUsers = saveRestUsers(12);
+				final Map<String, Object> req = new HashMap<>();
+				final List<UserDTO> users = new ArrayList<>(); 
+				
+				for (ResponseEntity<UserDTO> user : responseUsers) {
+					users.add(user.getBody());
+				}
+				
+				req.put("url", path + "/users");
+				req.put("Users", users);
+				
+				Transaction entity = Transaction.builder()
+						.classe(dto.getClasse())
+						.name("Teste Automatizado   Descrição:" + dto.getName())
+						.payloadReq(req)
+						.payloadRes(mapUser(responseUsers))
+						.build();
+				final var entitySaved = transactionRepository.save(entity);
+				return mapper.toDto(entitySaved);
+				
+			} catch (Exception e) {
+			
+			}
+		}
+		
+		final var entity = mapper.toEntity(dto);
+		final var entitySaved = transactionRepository.save(entity);
+		return mapper.toDto(entitySaved);
 	}
 
 	@Override
@@ -32,8 +81,48 @@ public class TransactionService implements GenericService<TransactionDTO, Transa
 		// TODO Auto-generated method stub
 		return null;
 	}
-//	@Autowired
-//	private CustomerRepository customerRepository;
+	
+	@Value("${veloez.api.uri}")
+	private String path;
+	
+	private List<ResponseEntity<UserDTO>> saveRestUsers(int interacoes) {
+		var listResponse = new ArrayList<ResponseEntity<UserDTO>>();
+		
+		for (int i = 0; i < interacoes; i++) {
+			String uid = UUID.randomUUID().toString();
+			var user = UserDTO.builder()
+				.balance(BigDecimal.valueOf(20))
+				.cpf("123123")
+				.email("teste" + uid + "@gmail.com" )
+				.name("teste automatizado api" + i)
+				.password("teste123")
+				.build();
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+			try {
+				ResponseEntity<UserDTO> response = restTemplate.postForEntity( path + "/users", user , UserDTO.class );
+				listResponse.add(response);
+			} catch (Exception e) {
+				new ResourceNotFoundException("erro ao fazer chamada rest para users");
+			} 		
+		}
+		
+		return listResponse;
+	}
+	
+	private Map<String, Object> mapUser(List<ResponseEntity<UserDTO>> responseUsers){
+ 		final Map<String, Object> map = new HashMap<>();
+ 		if(responseUsers == null) {
+ 			map.put("ërro", "Resposta vazia ou nula");
+ 			return map;
+ 		}
+ 		
+ 		map.put("Total inclusos", responseUsers.size());
+ 		map.put("Pay Load Resposta", responseUsers);
+ 		return map;
+ 	}
+//	
 //	
 //	@Autowired
 //	private CostumerMapper mapper;
