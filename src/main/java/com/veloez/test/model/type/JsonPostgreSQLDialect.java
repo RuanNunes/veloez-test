@@ -1,6 +1,7 @@
 package com.veloez.test.model.type;
 
 import java.sql.Types;
+
 import org.hibernate.dialect.PostgreSQL9Dialect;
 
 /**

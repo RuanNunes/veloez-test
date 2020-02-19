@@ -1,9 +1,6 @@
 package com.veloez.test.contract.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-
-import com.veloez.test.contract.dto.PlaceDTO.PlaceDTOBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

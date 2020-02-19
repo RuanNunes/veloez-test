@@ -18,19 +18,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @Builder
 public class TransactionDTO {
-	
 	private Long id;
-	
 	@NotNull
 	private String name;
-
-	@NotNull
 	private Map<String, Object> payloadReq;
-	@NotNull
 	private Map<String, Object> payloadRes;
 	@NotNull
 	private Classe classe;
-	
 	private String error;
-
 }
